@@ -42,8 +42,6 @@ public class CompressedTree extends Keyed {
       DHistogram.NASplitDir naSplitDir = DHistogram.NASplitDir.values()[ab.get1U()];
       final boolean NAvsREST = naSplitDir == DHistogram.NASplitDir.NAvsREST;
       final boolean NALeft = naSplitDir == DHistogram.NASplitDir.NALeft;
-      final boolean NARight = naSplitDir == DHistogram.NASplitDir.NARight;
-      final boolean NANone = naSplitDir == DHistogram.NASplitDir.None;
       int equal = (nodeType&12) >> 2;
       assert (equal >= 0 && equal <= 3): "illegal equal value " + equal+" at "+ab+" in bitpile "+Arrays.toString(_bits);
 
@@ -82,7 +80,7 @@ public class CompressedTree extends Keyed {
                 ( (equal==2 || equal==3) && ibs.contains((int)d) ) )    // if contained in bitset, go right
       ) {
         // RIGHT
-        if (!(Double.isNaN(d) && NALeft)) { //NA and NALeft goes LEFT as well
+        if (!(Double.isNaN(d) && NALeft)) { //missing value with NALeft goes LEFT as well
           ab.skip(skip);        // Skip to the right subtree
           if (computeLeafAssignment && level < 64) bitsRight |= 1 << level;
           lmask = rmask;        // And set the leaf bits into common place

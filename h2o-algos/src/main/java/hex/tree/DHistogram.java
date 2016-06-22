@@ -257,6 +257,9 @@ public final class DHistogram extends Iced {
     if( _min2 > dsh._min2  ) _min2 = dsh._min2;
     if( _maxIn < dsh._maxIn) _maxIn = dsh._maxIn;
     add0(dsh);
+    _wNA.addAndGet(dsh._wNA.get());
+    _wYNA.addAndGet(dsh._wYNA.get());
+    _wYYNA.addAndGet(dsh._wYYNA.get());
   }
 
   // Inclusive min & max
